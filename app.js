@@ -17,6 +17,71 @@ app.get('/',(req,res)=>{
     res.send('Hello world')
 })
 
+app.get('/admin/accounts', async (req,res)=>{
+    try{
+        const accounts = await UserSignUp.find();
+        res.send(accounts)
+    }
+    catch(err){
+        res.status(500).send('Error occur')
+    }
+})
+app.get('/admin/accounts/:id', async (req,res)=>{
+    try{
+        const accountId = req.params.id;
+        const account = await UserSignUp.findById(accountId);
+        if (!account) {
+            return res.status(404).send('Account not found');
+        }
+        res.send(account);
+    }
+    catch(err){
+        console.error('Error fetching account:', err);
+        res.status(500).send('Error occurred while fetching account');
+    }
+})
+app.delete('/admin/accounts/:id', async (req,res)=>{
+    try{
+        const accountId = req.params.id;
+        const account = await UserSignUp.findByIdAndDelete(accountId);
+        if (!account) {
+            return res.status(404).send('Account not found');
+        }
+        res.send('Account Deleted Successfully!');
+    }
+    catch(err){
+        console.error('Error fetching account:', err);
+        res.status(500).send('Error occurred while fetching account');
+    }
+})
+
+app.put('/admin/accounts/:id', async (req,res)=>{
+    try{
+        const accountId = req.params.id;
+        const {username,email,password} = req.body;
+
+        if(!username || !email || !password){
+            return res.status(400).json({ error: 'At least one field (username, email, password) must be provided for update' });
+        }
+
+        const updateField = {};
+        if(username) updateField.username = username;
+        if(email) updateField.email = email;
+        if(password) updateField.password = password;
+
+        const updatedAccount = await UserSignUp.findByIdAndUpdate(accountId,updateField, {new:true})
+        if (!updatedAccount) {
+            return res.status(404).send('Account not found');
+        }
+
+        res.status(200).send('Account updated successfully');
+
+    }
+    catch(err){
+        console.log('Error Updating Account',err);
+        res.status(500).send('Error occured while updating account')
+    }
+})
 app.post('/signup', async (req, res) => {
     try {
         const { username, email, password } = req.body;
