@@ -1,9 +1,14 @@
 const express = require('express');
 const app = express();
+const path = require('path')
 require('dotenv').config();
 const mongoose = require('mongoose');
 const UserSignUp = require('./Schema/signup')
 app.use(express.json())
+app.use(express.urlencoded({ extended: true })); // Parse URL-encoded bodies
+
+const publicFolderPath = path.join(__dirname,'public');
+app.use(express.static(publicFolderPath));
 mongoose
     .connect(process.env.MongoDBURI)
     .then(()=>{
@@ -102,6 +107,31 @@ app.post('/signup', async (req, res) => {
         res.status(200).send('Signed Up Successfully!')
     } catch (err) {
         console.error('Signup Error:', err);
+        res.status(500).json({ error: 'Internal server error' });
+    }
+});
+
+app.post('/login', async (req, res) => {
+    try {
+        const { username, password } = req.body;
+        
+        // Check if username and password are provided
+        if (!username || !password) {
+            return res.status(400).json({ error: 'Username and password are required' });
+        }
+        
+        // Check if the provided username exists in the database
+        const user = await UserSignUp.findOne({ username });
+
+        // If user with the provided username doesn't exist or password doesn't match, return error
+        if (!user || user.password !== password) {
+            res.status(401).send('Invalid username or password');
+        }
+
+        // If login is successful, you can respond with a success message or redirect the user
+        res.status(200).send('Log In Successful');
+    } catch (err) {
+        console.error('Login Error:', err);
         res.status(500).json({ error: 'Internal server error' });
     }
 });

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - page</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            box-sizing: border-box;
+        }
+
+        body{
+            display: flex;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+        main{
+            display: flex;
+            height: 500px;
+            width: 25%;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            background-color: #68414134;
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            width: 70%;
+        }
+        input[type='text'],
+        input[type='email'],
+        input[type='password'],
+        button[type='submit']{
+            padding: 10px;
+            margin-top: 8px;
+            border: none;
+        }
+
+        button[type='submit']{
+            margin-top: 20px;
+        }
+        main p{
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <h1>Create your account</h1>
+        <form action="/signup" method="post">
+            <label for="username">Username</label>
+            <input type="text" name="username" required>
+            <label for="email">Email</label>
+            <input type="email" name="email" required>
+            <label for="password">Password</label>
+            <input type="password" name="password" required>
+            <button type="submit">Sign Up</button>
+        </form>
+        
+        <p>Already have an account? <a href="login.html">Log In</a></p>
+    </main>
+</body>
+</html>
