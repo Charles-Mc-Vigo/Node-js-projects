@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+*{
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins',sans-serif;
+}
+
+body{
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(147, 147, 218);
+    flex-direction: column;
+}
+
+header{
+    color: #fff;
+    font-weight: 600;
+    font-size: 24px;
+}
+.container{
+    position: relative;
+    text-align: center;
+    width: 100%;
+    background-color: rgb(92, 92, 207);
+    padding: 20px;
+    border-radius: 8px;
+}
+form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 12px 20px 0 20px;
+}
+
+input[type='text'],
+input[type='email'],
+input[type='password']{
+    position: relative;
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 8px 0;
+    border-radius: 4px;
+}
+
+label {
+    text-align: left;
+    width: 100%;
+    padding: 8px 0;
+    color: #fff;
+}
+
+button{
+    width: 100%;
+    background-color: rgb(41, 41, 179);
+    color: #fff;
+    padding: 8px 0;
+    margin: 20px 0 0 0;
+    border: none;
+    border-radius: 4px;
+    font-weight: 400;
+}
+
+#form-p{
+    margin: 14px 0;
+}
