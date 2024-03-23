@@ -19,7 +19,7 @@ mongoose
     })
 
 app.get('/',(req,res)=>{
-    res.send('Hello world')
+    res.sendFile(path.join(publicFolderPath, 'landingpage.html'))
 })
 
 app.get('/admin/accounts', async (req,res)=>{
@@ -125,7 +125,7 @@ app.post('/login', async (req, res) => {
 
         // If user with the provided username doesn't exist or password doesn't match, return error
         if (!user || user.password !== password) {
-            res.status(401).send('Invalid username or password');
+            return res.status(401).send('Invalid username or password');
         }
 
         // If login is successful, you can respond with a success message or redirect the user
@@ -135,6 +135,7 @@ app.post('/login', async (req, res) => {
         res.status(500).json({ error: 'Internal server error' });
     }
 });
+
 
 
 app.listen(process.env.PORT,()=>{

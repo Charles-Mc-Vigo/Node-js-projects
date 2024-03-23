@@ -11,7 +11,10 @@ body{
     align-items: center;
     justify-content: center;
     background-color: rgb(147, 147, 218);
-    flex-direction: column;
+}
+nav{
+    position: absolute;
+    top: 0;
 }
 
 header{
