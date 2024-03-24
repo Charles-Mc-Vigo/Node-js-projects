@@ -1,81 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin Dashboard</title>
-</head>
-<body>
-    <button>        <a href="landingpage.html" style="font-size: 20px; text-decoration:none;">Home</a></button>
+  </head>
+  <body>
+    <button>
+      <a href="landingpage.html" style="font-size: 20px; text-decoration: none"
+        >Home</a
+      >
+    </button>
     <button id="seeAccountsBtn">See Accounts</button>
-    
+
     <table id="accountsTable">
-        <thead>
-            <tr>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody id="accountsTableBody">
-            <!-- Accounts will be dynamically added here -->
-        </tbody>
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Email</th>
+          <th>Password</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="accountsTableBody">
+        <!-- Accounts will be dynamically added here -->
+      </tbody>
     </table>
 
     <script>
-        document.getElementById('seeAccountsBtn').addEventListener('click', async () => {
-            try {
-                const response = await fetch('/admin/accounts');
-                const accounts = await response.json();
+      document
+        .getElementById("seeAccountsBtn")
+        .addEventListener("click", async () => {
+          try {
+            const response = await fetch("/admin/accounts");
+            const accounts = await response.json();
 
-                const accountsTableBody = document.getElementById('accountsTableBody');
-                accountsTableBody.innerHTML = ''; // Clear existing rows
+            const accountsTableBody =
+              document.getElementById("accountsTableBody");
+            accountsTableBody.innerHTML = ""; // Clear existing rows
 
-                accounts.forEach(account => {
-                    const row = document.createElement('tr');
+            accounts.forEach((account) => {
+              const row = document.createElement("tr");
 
-                    const usernameCell = document.createElement('td');
-                    usernameCell.textContent = account.username;
+              const usernameCell = document.createElement("td");
+              usernameCell.textContent = account.username;
 
-                    const emailCell = document.createElement('td');
-                    emailCell.textContent = account.email;
+              const emailCell = document.createElement("td");
+              emailCell.textContent = account.email;
 
-                    const passwordCell = document.createElement('td');
-                    passwordCell.textContent = account.password;
+              const passwordCell = document.createElement("td");
+              passwordCell.textContent = account.password;
 
-                    const actionsCell = document.createElement('td');
-                    const editButton = document.createElement('button');
-                    editButton.textContent = 'Edit';
-                    editButton.addEventListener('click', () => editAccount(account._id)); // Assuming you have a function to handle edit action
-                    const deleteButton = document.createElement('button');
-                    deleteButton.textContent = 'Delete';
-                    deleteButton.addEventListener('click', () => deleteAccount(account._id)); // Assuming you have a function to handle delete action
+              const actionsCell = document.createElement("td");
+              const editButton = document.createElement("button");
+              editButton.textContent = "Edit";
+              editButton.addEventListener("click", () =>
+                editAccount(account._id)
+              ); // Assuming you have a function to handle edit action
+              const deleteButton = document.createElement("button");
+              deleteButton.textContent = "Delete";
+              deleteButton.addEventListener("click", () =>
+                deleteAccount(account._id)
+              ); // Assuming you have a function to handle delete action
 
-                    actionsCell.appendChild(editButton);
-                    actionsCell.appendChild(deleteButton);
+              actionsCell.appendChild(editButton);
+              actionsCell.appendChild(deleteButton);
 
-                    row.appendChild(usernameCell);
-                    row.appendChild(emailCell);
-                    row.appendChild(passwordCell);
-                    row.appendChild(actionsCell);
+              row.appendChild(usernameCell);
+              row.appendChild(emailCell);
+              row.appendChild(passwordCell);
+              row.appendChild(actionsCell);
 
-                    accountsTableBody.appendChild(row);
-                });
-            } catch (error) {
-                console.error('Error fetching accounts:', error);
-            }
+              accountsTableBody.appendChild(row);
+            });
+          } catch (error) {
+            console.error("Error fetching accounts:", error);
+          }
         });
 
-        function editAccount(accountId) {
-            // Handle edit action, you can redirect to a different page or show a modal for editing
-            console.log('Edit account with ID:', accountId);
-        }
+      function editAccount(accountId) {
+        // Handle edit action, you can redirect to a different page or show a modal for editing
+        console.log("Edit account with ID:", accountId);
+      }
 
-        function deleteAccount(accountId) {
-            // Handle delete action, you can show a confirmation dialog before deleting
-            console.log('Delete account with ID:', accountId);
-        }
+      function deleteAccount(accountId) {
+        // Handle delete action, you can show a confirmation dialog before deleting
+        console.log("Delete account with ID:", accountId);
+      }
     </script>
-</body>
+  </body>
 </html>
